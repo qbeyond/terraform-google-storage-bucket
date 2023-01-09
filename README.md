@@ -1,4 +1,6 @@
 # Google Cloud Storage Module
+Original Module from [Cloud-Foundation-Fabric](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric)
+
 ## Example
 
 ```hcl
@@ -142,3 +144,8 @@ module "bucket-gcs-notification" {
 | [url](outputs.tf#L56) | Bucket URL. |  |
 
 <!-- END TFDOC -->
+
+## Contribute
+
+
+This module is derived from [google cloud foundation fabric module `gcs` v19](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric/tree/v19.0.0/modules/gcs). It is designed to be able to integrate new changes from the base repository. Refer to [guide in `terraform-google-landing-zone` repository](https://github.com/qbeyond/terraform-google-landing-zone/tree/main#updating-a-repository) for information on integrating changes.
