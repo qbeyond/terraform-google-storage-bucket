@@ -9,10 +9,7 @@ resource "random_string" "bucketprefix" {
 
 module "bucket" {
   source     = "../.."
-  project_id = "dev-gkedemo1-01"
+  project_id = var.project_id
   prefix     = random_string.bucketprefix.result
-  name       = "qby-bucket"
-  #iam = {
-  #  "roles/storage.admin" = ["group:storage@example.com"]
-  #}
+  name       = var.bucket_name
 }
