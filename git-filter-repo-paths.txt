@@ -1,0 +1,8 @@
+#git filter-repo --paths-from-file git-filter.txt --tag-rename '':'cff-'
+# Paths for the stage
+modules/gcs/
+modules/gcs/==>
+
+# Files required for Licensing
+LICENSE
+NOTICE
