@@ -108,47 +108,6 @@ module "bucket-gcs-notification" {
 }
 # tftest modules=1 resources=4
 ```
-<!-- BEGIN TFDOC -->
-
-## Variables
-
-| name | description | type | required | default |
-|---|---|:---:|:---:|:---:|
-| [name](variables.tf#L89) | Bucket name suffix. | <code>string</code> | ✓ |  |
-| [project_id](variables.tf#L117) | Bucket project id. | <code>string</code> | ✓ |  |
-| [cors](variables.tf#L17) | CORS configuration for the bucket. Defaults to null. | <code title="object&#40;&#123;&#10;  origin          &#61; list&#40;string&#41;&#10;  method          &#61; list&#40;string&#41;&#10;  response_header &#61; list&#40;string&#41;&#10;  max_age_seconds &#61; number&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-| [encryption_key](variables.tf#L28) | KMS key that will be used for encryption. | <code>string</code> |  | <code>null</code> |
-| [force_destroy](variables.tf#L34) | Optional map to set force destroy keyed by name, defaults to false. | <code>bool</code> |  | <code>false</code> |
-| [iam](variables.tf#L40) | IAM bindings in {ROLE => [MEMBERS]} format. | <code>map&#40;list&#40;string&#41;&#41;</code> |  | <code>&#123;&#125;</code> |
-| [labels](variables.tf#L46) | Labels to be attached to all buckets. | <code>map&#40;string&#41;</code> |  | <code>&#123;&#125;</code> |
-| [lifecycle_rule](variables.tf#L52) | Bucket lifecycle rule. | <code title="object&#40;&#123;&#10;  action &#61; object&#40;&#123;&#10;    type          &#61; string&#10;    storage_class &#61; string&#10;  &#125;&#41;&#10;  condition &#61; object&#40;&#123;&#10;    age                        &#61; number&#10;    created_before             &#61; string&#10;    with_state                 &#61; string&#10;    matches_storage_class      &#61; list&#40;string&#41;&#10;    num_newer_versions         &#61; string&#10;    custom_time_before         &#61; string&#10;    days_since_custom_time     &#61; string&#10;    days_since_noncurrent_time &#61; string&#10;    noncurrent_time_before     &#61; string&#10;  &#125;&#41;&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-| [location](variables.tf#L74) | Bucket location. | <code>string</code> |  | <code>&#34;EU&#34;</code> |
-| [logging_config](variables.tf#L80) | Bucket logging configuration. | <code title="object&#40;&#123;&#10;  log_bucket        &#61; string&#10;  log_object_prefix &#61; string&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-| [notification_config](variables.tf#L94) | GCS Notification configuration. | <code title="object&#40;&#123;&#10;  enabled           &#61; bool&#10;  payload_format    &#61; string&#10;  topic_name        &#61; string&#10;  sa_email          &#61; string&#10;  event_types       &#61; list&#40;string&#41;&#10;  custom_attributes &#61; map&#40;string&#41;&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-| [prefix](variables.tf#L107) | Optional prefix used to generate the bucket name. | <code>string</code> |  | <code>null</code> |
-| [retention_policy](variables.tf#L122) | Bucket retention policy. | <code title="object&#40;&#123;&#10;  retention_period &#61; number&#10;  is_locked        &#61; bool&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-| [storage_class](variables.tf#L131) | Bucket storage class. | <code>string</code> |  | <code>&#34;MULTI_REGIONAL&#34;</code> |
-| [uniform_bucket_level_access](variables.tf#L141) | Allow using object ACLs (false) or not (true, this is the recommended behavior) , defaults to true (which is the recommended practice, but not the behavior of storage API). | <code>bool</code> |  | <code>true</code> |
-| [versioning](variables.tf#L147) | Enable versioning, defaults to false. | <code>bool</code> |  | <code>false</code> |
-| [website](variables.tf#L153) | Bucket website. | <code title="object&#40;&#123;&#10;  main_page_suffix &#61; string&#10;  not_found_page   &#61; string&#10;&#125;&#41;">object&#40;&#123;&#8230;&#125;&#41;</code> |  | <code>null</code> |
-
-## Outputs
-
-| name | description | sensitive |
-|---|---|:---:|
-| [bucket](outputs.tf#L17) | Bucket resource. |  |
-| [id](outputs.tf#L28) | Bucket ID (same as name). |  |
-| [name](outputs.tf#L37) | Bucket name. |  |
-| [notification](outputs.tf#L46) | GCS Notification self link. |  |
-| [topic](outputs.tf#L51) | Topic ID used by GCS. |  |
-| [url](outputs.tf#L56) | Bucket URL. |  |
-
-<!-- END TFDOC -->
-
-## Contribute
-
-
-This module is derived from [google cloud foundation fabric module `gcs` v19](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric/tree/v19.0.0/modules/gcs). It is designed to be able to integrate new changes from the base repository. Refer to [guide in `terraform-google-landing-zone` repository](https://github.com/qbeyond/terraform-google-landing-zone/tree/main#updating-a-repository) for information on integrating changes.
 <!-- BEGIN_TF_DOCS -->
 ## Usage
 
@@ -238,3 +197,8 @@ No modules.
 | [google_storage_bucket_iam_binding.bindings](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam_binding) | resource |
 | [google_storage_notification.notification](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_notification) | resource |
 <!-- END_TF_DOCS -->
+
+## Contribute
+
+
+This module is derived from [google cloud foundation fabric module `gcs` v19](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric/tree/v19.0.0/modules/gcs). It is designed to be able to integrate new changes from the base repository. Refer to [guide in `terraform-google-landing-zone` repository](https://github.com/qbeyond/terraform-google-landing-zone/tree/main#updating-a-repository) for information on integrating changes.
