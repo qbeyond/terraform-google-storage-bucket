@@ -17,3 +17,19 @@ variable "group_email" {
   type = string
   description = "The email for the group"
 }
+
+variable "keyring_name" {
+  type = string
+  description = "name of the keyring"
+}
+
+variable "crypto_key_name" {
+  type = string
+  description = "The name of your encryption key"
+}
+
+variable "keyring_region" {
+  type = string
+  description = "location of the keyring"
+}
+

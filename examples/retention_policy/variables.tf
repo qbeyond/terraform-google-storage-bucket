@@ -17,3 +17,19 @@ variable "group_email" {
   type = string
   description = "The email for the group"
 }
+
+variable "retention_policy" {
+  description = "map object for retention_policy"
+  type = object({
+    retention_period = number
+    is_locked        = bool
+  })
+}
+
+variable "logging_config" {
+  description = "map object for logging config"
+  type = object({
+    log_bucket          = string
+    log_object_prefix   = optional(string)
+  })
+}
