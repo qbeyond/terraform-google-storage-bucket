@@ -3,18 +3,7 @@ variable "project_id" {
   description = "The Project ID where to create the GCS Bucket"
 }
 
-variable "keyring_name" {
+variable "keyring_location" {
   type = string
-  description = "name of the keyring"
+  description = "Location of KMS"
 }
-
-variable "crypto_key_name" {
-  type = string
-  description = "The name of your encryption key"
-}
-
-variable "keyring_region" {
-  type = string
-  description = "location of the keyring"
-}
-

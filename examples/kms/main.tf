@@ -8,11 +8,35 @@ data "google_project" "current" {
   project_id = var.project_id
 }
 
-# To use an existing encryption key, you have to grant permission to your Cloud Storage Agent
-# The Key and the Bucket must be in the same location!
-data "google_kms_crypto_key" "default" {
-  name     = var.crypto_key_name
-  key_ring = "projects/${var.project_id}/locations/${var.keyring_region}/keyRings/${var.keyring_name}"
+resource "random_string" "keyring" {
+  length           = 8
+  special          = false
+  upper            = false
+  numeric          = false
+}
+
+resource "random_string" "key" {
+  length           = 8
+  special          = false
+  upper            = false
+  numeric          = false
+}
+
+# Warning!
+# Creating this Resource creates a GCP KMS Keyring
+# On Destruction, this resource will be deleted from the state
+# but not from the project!
+
+#It is required to have the same location as the bucket
+resource "google_kms_key_ring" "default" {
+  depends_on = [google_project_iam_member.grant-google-storage-service-encrypt-decrypt]
+  name     = random_string.keyring.result
+  location = var.keyring_location
+}
+
+resource "google_kms_crypto_key" "default" {
+  name            = random_string.key.result
+  key_ring        = google_kms_key_ring.default.id
 }
 
 resource "google_project_iam_member" "grant-google-storage-service-encrypt-decrypt" {
@@ -31,5 +55,5 @@ module "bucket" {
   source     = "../.."
   project_id = var.project_id
   name       = random_string.bucket_name.result
-  encryption_key = data.google_kms_crypto_key.default.id
+  encryption_key = google_kms_crypto_key.default.id
 }
