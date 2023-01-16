@@ -4,44 +4,23 @@ provider "google" {
   billing_project = var.project_id
 }
 
-data "google_project" "current" {
-  project_id = var.project_id
+resource "random_string" "bucket_name" {
+  length           = 8
+  special          = false
+  upper            = false
 }
-
-data "google_organization" "org" {
-  count  = var.organization_domain != "" ? 1 : 0
-  domain = var.organization_domain
-}
-
-resource "google_cloud_identity_group" "basic" {
-  parent = "customers/${data.google_organization.org[0].directory_customer_id}"
-
-  group_key {
-      id = var.group_email
-  }
-
-  labels = {
-    "cloudidentity.googleapis.com/groups.discussion_forum" = ""
-  }
-
-  lifecycle {
-    precondition {
-      condition = can(regex(var.organization_domain, var.group_email))
-      error_message = "group_email must be the same domain as organization"
-    }
-  }
-}
-
-
 
 module "bucket" {
   source     = "../.."
   project_id = var.project_id
-  name       = var.bucket_name
-  iam = {
-    "roles/storage.admin"  = ["group:${google_cloud_identity_group.basic.group_key.0.id}"]
+  name       = random_string.bucket_name.result
+  retention_policy = {
+    retention_period = 1
+    is_locked = true
   }
-  retention_policy = try(var.retention_policy, null)
 
-  logging_config = try(var.logging_config, null)
+  logging_config = {
+    log_bucket = random_string.bucket_name.result
+    log_log_object_prefix = "foo"
+  }
 }
