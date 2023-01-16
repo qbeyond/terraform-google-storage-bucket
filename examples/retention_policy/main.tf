@@ -21,6 +21,6 @@ module "bucket" {
 
   logging_config = {
     log_bucket = random_string.bucket_name.result
-    log_log_object_prefix = "foo"
+    log_object_prefix = "foo"
   }
 }
