@@ -1,10 +1,9 @@
 # Google Cloud Storage Module
 Original Module from [Cloud-Foundation-Fabric](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric)
 
-To use an existing encryption key, you have to grant permission to your Cloud Storage Agent \
-which is automated by Terraform. \
+To use an existing encryption key, you have to grant permission to your Cloud Storage Agent which is automated by Terraform.
 
-The Key and the Bucket must be in the same location! \
+The Key and the Bucket must be in the same location!
 <!-- BEGIN_TF_DOCS -->
 ## Usage
 
